@@ -20,12 +20,10 @@ import baseline.sysmgmt.service.UserService;
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import crelle.ftp.client.FtpClientService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.transaction.annotation.Transactional;
@@ -75,7 +73,7 @@ public class UserController implements BaseController<User, UserQuery> {
     public ResponseResult<User> create(@RequestBody User user) {
         ResponseResult<User> responseResult = new ResponseResult<User>();
         try {
-            if (!(null == user.getId())) {
+            if (StringUtils.isNoneBlank(user.getId())) {
                 responseResult.buildFail("用户标识使用jpa自动生成，不需要传入！");
                 return responseResult;
             }

@@ -24,14 +24,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @TableName("t_dictionary")
-@ApiModel(value = "Dictionary对象", description = "字典表")
 public class Dictionary {
 
     @ApiModelProperty("主键")
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
     private String id;
 
-    @ApiModelProperty("名称")
+    @ApiModelProperty("父级名称")
     @TableField("name")
     private String name;
 

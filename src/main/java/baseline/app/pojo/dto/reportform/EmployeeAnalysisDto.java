@@ -1,17 +1,16 @@
-package baseline.app.pojo.entity;
+package baseline.app.pojo.dto.reportform;
 
 import baseline.common.pojo.entity.BaseDo;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-
-import java.util.Date;
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Date;
 
 /**
  * <p>
@@ -25,7 +24,11 @@ import lombok.Setter;
 @Setter
 @TableName("t_employee")
 @ApiModel(value = "Employee对象", description = "员工表")
-public class Employee extends BaseDo {
+public class EmployeeAnalysisDto extends BaseDo {
+
+    @ApiModelProperty("员工姓名")
+    @TableId(value = "id" ,type = IdType.ASSIGN_UUID)
+    private String id;
 
     @ApiModelProperty("员工姓名")
     @TableField("name")
@@ -127,12 +130,8 @@ public class Employee extends BaseDo {
     private String nativeAddress;
 
     @ApiModelProperty("经度")
-    @TableField("longitude")
     private String longitude;
 
-    @ApiModelProperty("维度")
-    @TableField("latitude")
+    @ApiModelProperty("经度")
     private String latitude;
-
-
 }

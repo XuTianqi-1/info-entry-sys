@@ -1,6 +1,7 @@
 package baseline.sysmgmt.controller;
 
 
+import baseline.common.annotation.EnablePagination;
 import baseline.common.pojo.vo.ResponseResult;
 import baseline.sysmgmt.pojo.entity.Dictionary;
 import baseline.sysmgmt.pojo.query.DictionaryQuery;
@@ -75,6 +76,7 @@ public class DictionaryController implements BaseController<DictionaryVo, Dictio
         return ResponseResult.ok();
     }
 
+    @EnablePagination
     @ApiOperation(value = "手动分页查询")
     @ApiParam(required = true, name = "xx", value = "入参")
     @RequestMapping(value = "/manualPage", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
@@ -116,7 +118,7 @@ public class DictionaryController implements BaseController<DictionaryVo, Dictio
     @ApiOperation(value = "更新字典")
     @ApiParam(required = true, name = "xx", value = "入参")
     @RequestMapping(value = "/update", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
-    public ResponseResult<String> update(@RequestBody @Validated(Dictionary.PUT.class) Dictionary obj) {
+    public ResponseResult<String> update(@RequestBody @Validated(Dictionary.POST.class) Dictionary obj) {
         try {
             dictionaryService.update(obj);
         } catch (Exception e) {

@@ -1,13 +1,14 @@
 package baseline.sysmgmt.pojo.entity;
 
+import baseline.common.pojo.validation.Validation;
 import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.util.CollectionUtils;
 
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -23,9 +24,10 @@ import java.util.List;
  */
 @TableName("t_user")
 @ApiModel(value = "User对象", description = "")
-public class User implements UserDetails {
+public class User  extends Validation implements UserDetails  {
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
+    @NotBlank(groups = {DELETE.class,PUT.class})
     private String id;
 
     @TableField("account_non_expired")
@@ -44,15 +46,18 @@ public class User implements UserDetails {
     private String password;
 
     @TableField("user_email")
+    @NotBlank(groups = {POST.class})
     private String userEmail;
 
     @TableField("user_nick_name")
     private String userNickName;
 
     @TableField("user_phone")
+    @NotBlank(groups = {POST.class})
     private String userPhone;
 
     @TableField("username")
+    @NotBlank(groups = {POST.class})
     private String username;
 
     @TableField("fullname")
@@ -62,6 +67,7 @@ public class User implements UserDetails {
     private String userAvatar;
 
     @TableField("job_no")
+    @NotBlank(groups = {POST.class})
     private String jobNo;
 
     @TableField(value = "create_time", fill = FieldFill.INSERT)

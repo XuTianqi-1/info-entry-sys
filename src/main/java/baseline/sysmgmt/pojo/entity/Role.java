@@ -8,9 +8,9 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 /**
@@ -29,16 +29,17 @@ public class Role extends BaseDo {
 
     @ApiModelProperty("角色id")
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
+    @NotBlank(groups = {PUT.class,DELETE.class})
     private String id;
 
     @ApiModelProperty("角色英文名称")
-    @NonNull
     @TableField("name")
+    @NotBlank(groups = {POST.class,PUT.class})
     private String name;
 
     @ApiModelProperty("角色中文名称")
-    @NonNull
     @TableField("name_zh")
+    @NotBlank(groups = {POST.class,PUT.class})
     private String nameZh;
 
     @TableField(exist = false)

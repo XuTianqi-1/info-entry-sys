@@ -1,8 +1,11 @@
 package baseline.sysmgmt.pojo.entity;
 
+import baseline.common.pojo.entity.BaseDo;
 import com.baomidou.mybatisplus.annotation.*;
 import io.swagger.annotations.ApiModel;
+import org.hibernate.validator.constraints.Length;
 
+import javax.validation.constraints.NotBlank;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,9 +19,10 @@ import java.util.Set;
  */
 @TableName("t_menu")
 @ApiModel(value = "Menu对象", description = "")
-public class Menu {
+public class Menu extends BaseDo {
 
     @TableId(value = "id", type = IdType.ASSIGN_UUID)
+    @NotBlank(groups = {DELETE.class, PUT.class})
     private String id;
 
     @TableField("component")
@@ -34,21 +38,25 @@ public class Menu {
     private Boolean keepAlive;
 
     @TableField("name")
+    @NotBlank(groups = {POST.class})
     private String name;
 
     @TableField(value = "parent_id")
     private String parentId;
 
     @TableField("path")
+    @NotBlank(groups = {POST.class})
     private String path;
 
     @TableField("require_auth")
     private Boolean requireAuth;
 
     @TableField("url")
+    @NotBlank(groups = {POST.class})
     private String url;
 
     @TableField("menu_type")
+    @NotBlank(groups = {POST.class})
     private String menuType;
 
     @TableField("menu_sort")

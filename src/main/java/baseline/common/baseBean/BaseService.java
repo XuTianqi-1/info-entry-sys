@@ -1,7 +1,6 @@
 package baseline.common.baseBean;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -60,7 +59,7 @@ public interface BaseService<V, T, Q> {
      * @param pageBean
      * @return
      */
-    Page<V> manualPage(@RequestBody Page<Q> pageBean);
+    Page<V> manualPage(Page<Q> pageBean);
 
     /**
      * 查询详情

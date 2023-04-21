@@ -2,6 +2,7 @@ package baseline.app.service;
 
 import baseline.app.pojo.query.reportform.*;
 import baseline.app.pojo.vo.reportform.*;
+
 import java.util.List;
 
 /**
@@ -20,4 +21,18 @@ public interface ReportFormService {
     List<SkillAnalysisVO> skillAnalysis(SkillAnalysisQuery skillAnalysisQuery);
 
     List<EmployeeAnalysisVO> employeeAnalysis(EmployeeAnalysisQuery employeeAnalysisQuery);
+
+    /**
+     * 员工工龄分布
+     * @param employeeSeniorityQuery
+     * @return
+     */
+    List<EmployeeSeniorityVO>  employeeSeniority( EmployeeSeniorityQuery employeeSeniorityQuery);
+
+    /**
+     * 员工年龄分布
+     * @param employeeAgeQuery
+     * @return
+     */
+    List<EmployeeAgeVO> employeeAge(EmployeeAgeQuery employeeAgeQuery);
 }

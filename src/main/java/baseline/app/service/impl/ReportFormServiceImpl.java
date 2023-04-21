@@ -1,7 +1,9 @@
 package baseline.app.service.impl;
 
 import baseline.app.mapper.ReportFormMapper;
+import baseline.app.pojo.dto.reportform.EmployeeAgeDto;
 import baseline.app.pojo.dto.reportform.EmployeeAnalysisDto;
+import baseline.app.pojo.dto.reportform.EmployeeSeniorityDto;
 import baseline.app.pojo.query.reportform.*;
 import baseline.app.pojo.vo.reportform.*;
 import baseline.app.service.ReportFormService;
@@ -62,5 +64,36 @@ public class ReportFormServiceImpl implements ReportFormService {
             list.add(employeeAnalysisVO);
         });
         return list;
+    }
+
+    @Override
+    public List<EmployeeSeniorityVO> employeeSeniority(EmployeeSeniorityQuery employeeSeniorityQuery) {
+        List<EmployeeSeniorityDto> employeeSeniorityDtos = reportFormMapper.employeeSeniority(employeeSeniorityQuery);
+        if (CollectionUtils.isEmpty(employeeSeniorityDtos)) {
+            return null;
+        }
+        List<EmployeeSeniorityVO> employeeSeniorityVOS = new ArrayList<>(employeeSeniorityDtos.size());
+        employeeSeniorityDtos.forEach(employeeSeniorityDto -> {
+            EmployeeSeniorityVO employeeSeniorityVO = new EmployeeSeniorityVO();
+            BeanUtils.copyProperties(employeeSeniorityDto, employeeSeniorityVO);
+            employeeSeniorityVOS.add(employeeSeniorityVO);
+        });
+
+        return employeeSeniorityVOS;
+    }
+
+    @Override
+    public List<EmployeeAgeVO> employeeAge(EmployeeAgeQuery employeeAgeQuery) {
+        List<EmployeeAgeDto> employeeAgeDtos = reportFormMapper.employeeAge(employeeAgeQuery);
+        if (CollectionUtils.isEmpty(employeeAgeDtos)) {
+            return null;
+        }
+        List<EmployeeAgeVO> employeeAgeVOS = new ArrayList<>(employeeAgeDtos.size());
+        employeeAgeDtos.forEach(employeeAgeDto -> {
+            EmployeeAgeVO employeeAgeVO = new EmployeeAgeVO();
+            BeanUtils.copyProperties(employeeAgeDto, employeeAgeVO);
+            employeeAgeVOS.add(employeeAgeVO);
+        });
+        return employeeAgeVOS;
     }
 }

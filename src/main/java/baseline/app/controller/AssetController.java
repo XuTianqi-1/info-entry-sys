@@ -11,10 +11,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import javafx.print.PageOrientation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.constraints.NotBlank;
 import java.util.List;
 
 /**
@@ -36,7 +39,7 @@ public class AssetController implements BaseController<AssetVo, Asset, AssetQuer
     @ApiParam(required = true, name = "", value = "入参")
     @RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @Override
-    public ResponseResult<Asset> create(Asset object) {
+    public ResponseResult<Asset> create(@RequestBody @Validated(Asset.POST.class) Asset object) {
         ResponseResult result = new ResponseResult();
         boolean isSuccess = assetService.create(object);
         if (!isSuccess) {
@@ -49,7 +52,7 @@ public class AssetController implements BaseController<AssetVo, Asset, AssetQuer
     @ApiParam(required = true, name = "", value = "入参")
     @RequestMapping(value = "/creates", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @Override
-    public ResponseResult<Asset> creates(List<Asset> objects) {
+    public ResponseResult<Asset> creates(@Validated(Asset.POST.class) List<Asset> objects) {
         ResponseResult result = new ResponseResult();
         boolean isSuccess = assetService.create(objects);
         if (!isSuccess) {
@@ -62,7 +65,7 @@ public class AssetController implements BaseController<AssetVo, Asset, AssetQuer
     @ApiParam(required = true, name = "id", value = "入参")
     @RequestMapping(value = "/deleteById/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @Override
-    public ResponseResult<String> deleteById(@PathVariable String id) {
+    public ResponseResult<String> deleteById(@NotBlank String id) {
         ResponseResult result = new ResponseResult();
         assetService.deleteById(id);
         return result;
@@ -82,7 +85,7 @@ public class AssetController implements BaseController<AssetVo, Asset, AssetQuer
     @ApiParam(required = true, name = "id", value = "入参")
     @RequestMapping(value = "/updateById", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
     @Override
-    public ResponseResult<String> updateById(Asset object) {
+    public ResponseResult<String> updateById(@Validated(Asset.PUT.class) Asset object) {
         return null;
     }
 
